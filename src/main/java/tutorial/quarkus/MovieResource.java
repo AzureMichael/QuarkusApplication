@@ -14,9 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.jboss.resteasy.annotations.Query;
 
-@Path("/movies")
+@Path("movies")
 public class MovieResource {
 
     public static List<String> movies = new ArrayList<>();
@@ -29,7 +28,7 @@ public class MovieResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/size")
+    @Path("size")
     public Integer countMovies() {
         return movies.size();
     }
@@ -43,12 +42,12 @@ public class MovieResource {
     }
 
     @PUT
-    @Path("/{movieToUpdate}")
+    @Path("{movieToUpdate}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public Response updateMovie(
         @PathParam("movieToUpdate") String movieToUpdate,
-        @QueryParam("movie") String updateMovie) {
+        @QueryParam("name") String updateMovie) {
         movies = movies.stream().map(movie -> {
             if(movie.equals(movieToUpdate)){
                 return updateMovie;
